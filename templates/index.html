@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breat Cancer Predictor</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <script src='https://meet.jit.si/external_api.js'></script>
+</head>
+<style>
+    * {
+        margin: 0rem;
+        padding: 0rem;
+        font-family: 'Ubuntu', sans-serif;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Ubuntu', sans-serif;
+        width: 100%;
+        height: 100%;
+        font-weight: bolder;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: left;
+        width: 100%;
+        background-color: rgb(41, 39, 39);
+        ;
+
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+
+    }
+
+    input {
+        margin: 0px 10px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .item {
+        display: flex;
+        margin: 12px 22px;
+
+    }
+
+    .item input {
+        margin-top: 5xp;
+        font-size: larger;
+
+        width: 150%;
+        padding: 2px;
+
+    }
+
+    .item button {
+        padding: 5px;
+        font-size: larger;
+
+        width: 300%;
+        border-radius: 15px;
+        background-color: black;
+        color: white;
+        cursor: pointer;
+
+    }
+
+    .container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* background-image: url(https://images.pexels.com/photos/5149754/pexels-photo-5149754.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); */
+        /* background-image: url(https://images.pexels.com/photos/3900427/pexels-photo-3900427.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500) ; */
+        /* background-image: url(https://images.pexels.com/photos/3900468/pexels-photo-3900468.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500) ; */
+        background-image: url(../static/background.jpg) ;
+        background-size: cover;
+        opacity: .8;
+
+        z-index: -1;
+
+    }
+
+
+
+
+    nav {
+        display: flex;
+        background-color: rgb(41, 39, 39);
+        /* justify-content: center;*/
+        align-items: left;
+        margin: 0rem 0rem;
+        position: sticky;
+        top: 0;
+        flex-wrap: wrap;
+        width: 100%;
+
+
+    }
+
+
+    .logo {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        /* background-color: aqua; */
+        justify-content: center;
+        align-items: left;
+        font-size: larger;
+        font-weight: bolder;
+        color: white;
+        width: 100%;
+    }
+
+    nav li {
+        list-style: none;
+    }
+
+    .logo img {
+
+        width: 6rem;
+        height: 3rem;
+
+    }
+
+    .item li {
+        /* margin: 0.2rem 0rem; */
+        padding: 0.5rem;
+    }
+
+    .item a {
+        text-decoration: none;
+        color: white;
+        margin: 0px 20px;
+    }
+
+    .item a:hover {
+        border-bottom: 2px solid white;
+    }
+
+    .item a:active {
+        border-bottom: 2px solid white;
+    }
+
+    .item a {
+        padding-bottom: .5rem;
+    }
+
+    nav input {
+        text-align: center;
+        border-radius: 1rem;
+        font-size: larger;
+        flex-grow: 1;
+        margin-right: 2rem;
+        margin-left: 30%;
+    }
+
+    .right-nav {
+        display: flex;
+        flex-wrap: wrap;
+        /* background-color: aqua; */
+        justify-content: center;
+        align-items: right;
+    }
+
+    h1 {
+        text-align: center;
+        padding: 5px 20px;
+        margin: 5px 20px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <nav id="navigation">
+                <!-- <div class="item logo" id="logo">
+                    <img src="./img/logo.png" alt="Website logo">
+                </div> -->
+                <ul class="item" id="list">
+                    <li>
+                        <a href="#"> Home</a>
+                    </li>
+                    <li>
+                        <a href="#">About Us</a>
+                    </li>
+                    <li>
+                        <a href="./chat-bot" target="_blank">Chatbot Service</a>
+                    </li>
+                    <li>
+                        <a href="./video-call" target="_blank">Request Appointment</a>
+                    </li>
+                    <li>
+                        <a href="#">SignIn/SignUp</a>
+                    </li>
+                </ul>
+
+            </nav>
+        </header>
+    </div>
+    <h1>Breast Cancer Predictor</h1>
+    <form method="POST" , action="{{url_for('home')}}">
+        <div class="item">
+            Radius_mean <input type="number" placeholder="range(6.981 - 28.11)" name="radius_mean"
+                value="{{ request.form['radius_mean'] }}">
+        </div>
+
+        <div class="item">
+            Texture_mean <input type="number" placeholder="range(9.71 - 39.28)" name="texture_mean"
+                value="{{ request.form['texture_mean'] }}">
+        </div>
+        <div class="item">
+            Smoothness_mean <input type="number" placeholder="range(0.0526 - 0.1634)" name="smoothness_mean"
+                value="{{ request.form['smoothness_mean'] }}"></div>
+        <div class="item">
+            Compactness_mean <input type="number" placeholder="range(0.0193 - 0.3454)" name="compactness_mean"
+                value="{{ request.form['compactness_mean'] }}"></div>
+        <div class="item">
+            Concavity_mean <input type="number" placeholder="range(0.0 - 0.4268)" name="concavity_mean"
+                value="{{ request.form['concavity_mean'] }}"></div>
+        <div class="item">
+            Symmetry_mean <input type="number" placeholder="range(0.106 - 0.304)" name="symmetry_mean"
+                value="{{ request.form['symmetry_mean'] }}"></div>
+        <div class="item">
+            Fractal_dimension_mean <input type="number" placeholder="range(60.049 - 0.097)"
+                name="fractal_dimension_mean" value="{{ request.form['fractal_dimension_mean'] }}">
+        </div>
+        <div class="item">
+            <button type="submit"> Check your status</button>
+        </div>
+    </form>
+
+
+
+
+
+
+
+    <div class="item">
+        {%if data == 1%}
+
+        <h1> Result : Malignant</h1>
+
+        {%elif data == 0 %}
+        <h1> Result &nbsp; &nbsp; &nbsp;: &nbsp; &nbsp; &nbsp; Benign</h1>
+
+        {%endif%}
+    </div>
+
+
+    <!-- <div id="jitsi-container">
+    </div>
+
+    <script>
+        var button = document.querySelector('#start');
+
+        var container = document.querySelector('#jitsi-container');
+        var api = null;
+
+        button.addEventListener('click', () => {
+            // alert("button is clicked");
+
+            var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var stringLength = 30;
+
+            function pickRandom() {
+                return possible[Math.floor(Math.random() * possible.length)];
+            }
+
+            var randomString = Array.apply(null, Array(stringLength)).map(pickRandom).join('');
+
+            var domain = "meet.jit.si";
+            var options = {
+                "roomName": randomString,
+                "parentNode": container,
+                "width": 600,
+                "height": 600,
+            };
+            api = new JitsiMeetExternalAPI(domain, options);
+        });
+
+    </script> -->
+
+</body>
+
+</html>

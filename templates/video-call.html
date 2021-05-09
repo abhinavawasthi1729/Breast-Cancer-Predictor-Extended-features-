@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://meet.jit.si/external_api.js'></script>
+    <title>Video call</title>
+</head>
+
+<body>
+
+    <div id="jitsi-container">
+    </div>
+
+    <script>
+        // var button = document.querySelector('#start');
+
+        var container = document.querySelector('#jitsi-container');
+        var api = null;
+
+        function launch_video() {
+            // alert("button is clicked");
+
+            var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var stringLength = 30;
+
+            function pickRandom() {
+                return possible[Math.floor(Math.random() * possible.length)];
+            }
+
+            var randomString = Array.apply(null, Array(stringLength)).map(pickRandom).join('');
+
+            var domain = "meet.jit.si";
+            var options = {
+                "roomName": randomString,
+                "parentNode": container,
+                "width": 600,
+                "height": 600,
+            };
+            api = new JitsiMeetExternalAPI(domain, options);
+        }
+
+        launch_video();
+
+    </script>
+
+
+</body>
+
+</html>
